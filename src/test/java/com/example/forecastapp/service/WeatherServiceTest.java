@@ -31,7 +31,7 @@ class WeatherServiceTest {
     @Mock
     private WebClient.ResponseSpec responseSpec;
 
-    @InjectMocks // Tworzy instancję WeatherService i wstrzykuje do niej powyższe mocki
+    @InjectMocks // tworzy instancję WeatherService i wstrzykuje do niej powyższe mocki
     private WeatherService weatherService;
 
     @Test

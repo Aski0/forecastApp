@@ -38,8 +38,8 @@ class WeatherControllerTest {
         mockMvc.perform(get("/api/v1/weather/summary")
                         .param("latitude", "52.0")
                         .param("longitude", "21.0"))
-                .andExpect(status().isOk()) // Oczekujemy statusu 200 OK
-                .andExpect(content().contentType(MediaType.APPLICATION_JSON)) // Oczekujemy JSON
+                .andExpect(status().isOk())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.maxTemperatureWeek").value(25.5))
                 .andExpect(jsonPath("$.weatherSummary").value("Tydzień w większości bez opadów"));
     }
@@ -50,6 +50,6 @@ class WeatherControllerTest {
         mockMvc.perform(get("/api/v1/weather/summary")
                         .param("latitude", "100.0") // nieprawidłowa wartość
                         .param("longitude", "21.0"))
-                .andExpect(status().isBadRequest()); // oczekujemy błędu 400
+                .andExpect(status().isBadRequest());
     }
 }

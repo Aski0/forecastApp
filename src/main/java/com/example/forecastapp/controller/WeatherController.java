@@ -5,10 +5,7 @@ import com.example.forecastapp.dto.WeeklySummaryDto;
 import com.example.forecastapp.service.WeatherService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 
@@ -18,16 +15,18 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/v1/weather")
+//@CrossOrigin(origins = "*")
 public class WeatherController {
     private final WeatherService weatherService;
     @GetMapping("/forecast")
     public List<DailyForecastDto> get7DayForecast(
-            @RequestParam
+            //szerokość geograficzna + walidacja
+            @RequestParam("lat")
             @Min(value = -90, message = "Szerokość geograficzna musi być większa lub równa -90")
             @Max(value = 90, message = "Szerokość geograficzna musi być mniejsza lub równa 90")
             double latitude,
-
-            @RequestParam
+            //długość geograficzna + walidacja
+            @RequestParam("lon")
             @Min(value = -180, message = "Długość geograficzna musi być większa lub równa -180")
             @Max(value = 180, message = "Długość geograficzna musi być mniejsza lub równa 180")
             double longitude) {
@@ -36,11 +35,11 @@ public class WeatherController {
 
     @GetMapping("/summary")
     public WeeklySummaryDto getWeeklySummary(
-            @RequestParam
+            @RequestParam("lat")
             @Min(value = -90, message = "Szerokość geograficzna musi być większa lub równa -90")
             @Max(value = 90, message = "Szerokość geograficzna musi być mniejsza lub równa 90")
             double latitude,
-            @RequestParam
+            @RequestParam("lon")
             @Min(value = -180, message = "Długość geograficzna musi być większa lub równa -180")
             @Max(value = 180, message = "Długość geograficzna musi być mniejsza lub równa 180")
             double longitude) {
